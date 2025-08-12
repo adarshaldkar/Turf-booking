@@ -1,4 +1,5 @@
 import './Input.css';
+import PropTypes from 'prop-types';
 
 const Input = ({
   type,
@@ -25,5 +26,16 @@ const Input = ({
     </div>
   );
 };
+Input.propTypes = {
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  label: PropTypes.string,
+  classname: PropTypes.string,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  id: PropTypes.string,
+};
 
 export default Input;
+// export default Input;

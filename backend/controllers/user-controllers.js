@@ -2,11 +2,12 @@ const User = require('../db/models/user-schema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const checkToken = require('../middlewares/check-token');
+const { sendEmail, emailTemplates } = require('../config/email');
 
 //Signup setup
 module.exports.signup = async (req, res) => {
   try {
-    const { firstname, lastname, email, password, conformpassword } = req.body;
+    const { firstname, lastname, email, password, confirmpassword } = req.body;
 
     const user = await User.findOne({ email: email });
 
@@ -15,7 +16,7 @@ module.exports.signup = async (req, res) => {
       res.status(400).json({ message: 'Email already Taken' });
     }
 
-    if (password != conformpassword) {
+    if (password != confirmpassword) {
       //checking both passwords
       return res.status(400).json({ message: 'Passwords does Not Match' });
     }
@@ -28,6 +29,15 @@ module.exports.signup = async (req, res) => {
       email,
       password: hashedPassowrd,
     });
+
+    // Send welcome email
+    try {
+      const template = emailTemplates.welcomeEmail(firstname);
+      await sendEmail(email, template.subject, template.html);
+    } catch (emailError) {
+      console.error('Error sending welcome email:', emailError);
+      // Don't fail the registration if email fails
+    }
 
     return res.status(200).json({ message: 'User signedup successfully' });
   } catch (e) {

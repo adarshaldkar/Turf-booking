@@ -22,21 +22,27 @@ const Contact = () => {
     const formData = { name, email, mobile, message };
 
     try {
+      // Send to our backend email service
       const response = await fetch(
-        'https://script.google.com/macros/s/AKfycbxScKJYBGX9h_g0XA9wKoA5IRECL_3cULlcgUmVijA4ygk5yAD-ZPXK--oBdvfazD4C/exec',
+        'http://localhost:5000/api/email/contact',
         {
           method: 'POST',
-          mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),
         }
       );
 
-      alert('Form submitted successfully!');
-      document.getElementById('contactForm').reset(); // Clear form after submission
+      const result = await response.json();
+
+      if (result.success) {
+        alert('Form submitted successfully! We will get back to you soon.');
+        document.getElementById('contactForm').reset(); // Clear form after submission
+      } else {
+        alert('Failed to submit form. Please try again.');
+      }
     } catch (error) {
       console.error('Error:', error);
-      alert('Failed to submit form.');
+      alert('Failed to submit form. Please try again.');
     }
   };
 

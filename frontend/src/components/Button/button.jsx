@@ -1,4 +1,5 @@
-import './button.css';
+// import './button.css';
+import PropTypes from 'prop-types';
 
 const Button = ({
   text = 'Click',
@@ -6,7 +7,7 @@ const Button = ({
   height,
   padding,
   fontsize,
-  fontwaight,
+  fontweight,
   borderradius,
   className,
   onclick,
@@ -18,16 +19,15 @@ const Button = ({
     <div className="button">
       <button
         style={{
-          text: text,
           width: width,
           height: height,
           padding: padding,
           fontSize: fontsize,
-          fontWeight: fontwaight,
+          fontWeight: fontweight,
           borderRadius: borderradius,
           backgroundColor: backgroundcolor,
           color: color,
-          style: style,
+          ...style,
         }}
         className={className}
         onClick={onclick}
@@ -36,6 +36,21 @@ const Button = ({
       </button>
     </div>
   );
+};
+
+Button.propTypes = {
+  text: PropTypes.string,
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  padding: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  fontsize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  fontweight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  borderradius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  className: PropTypes.string,
+  onclick: PropTypes.func,
+  backgroundcolor: PropTypes.string,
+  color: PropTypes.string,
+  style: PropTypes.object,
 };
 
 export default Button;
