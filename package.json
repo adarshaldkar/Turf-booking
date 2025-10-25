@@ -1,0 +1,20 @@
+{
+  "name": "turfspot",
+  "version": "1.0.0",
+  "description": "TurfSpot is a comprehensive turf booking application with three modules: Admin, Owner, and User. This app allows users to view and book turf grounds, owners to manage their turfs and bookings, and admins to oversee all activities within the platform.",
+  "homepage": "https://github.com/RijoKsd/TurfSpot#readme",
+  "bugs": {
+    "url": "https://github.com/RijoKsd/TurfSpot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RijoKsd/TurfSpot.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
